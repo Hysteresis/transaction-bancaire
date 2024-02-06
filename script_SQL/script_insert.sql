@@ -32,11 +32,3 @@ SELECT
     END AS LABEL,
     CATEGORIE || ' - ' || SOUS_CATEGORIE AS CATEGORIE_COMBINEE
 FROM ODS_TRANSACTION;
-
-
-
-
-
-
--- INSERT INTO F_Operation (PK_Ref, FK_Date_Compta, FK_Transaction_Code, FK_Ope, Montant)
-
