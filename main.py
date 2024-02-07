@@ -2,14 +2,17 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 import oracledb
 
+
 def connecter_base_de_donnees():
     conn = oracledb.connect(user='system', password='root', host="localhost", port=1521)
     cursor = conn.cursor()
     return conn, cursor
 
+
 def fermer_base_de_donnees(conn, cursor):
     cursor.close()
     conn.close()
+
 
 def executer_requete_sql(requete):
     conn, cursor = connecter_base_de_donnees()
@@ -17,6 +20,7 @@ def executer_requete_sql(requete):
     resultats = cursor.fetchall()
     fermer_base_de_donnees(conn, cursor)
     return resultats
+
 
 def grosse_categorie_de_depense():
     requete = '''SELECT FK_CATEGORIE, SUM(MONTANT) AS TOTAL_DEPENSE
@@ -28,6 +32,7 @@ def grosse_categorie_de_depense():
     for row in results:
         print(row)
     label_depense.config(text=f"Grosse catégorie de dépense : {results[0][0]}, Total : {results[0][1]} €")
+
 
 def sous_categorie_revenue():
     requete = '''
@@ -48,6 +53,7 @@ def sous_categorie_revenue():
     for row in results:
         print(row)
     label_revenue.config(text=f"Sous catégorie: {results[0][0]}, Total : {results[0][1]} €")
+
 
 def evolution_solde():
     requete = '''
@@ -70,6 +76,7 @@ def evolution_solde():
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
+
 
 root = tk.Tk()
 root.title("Transaction bancaire")
